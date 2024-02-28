@@ -3,35 +3,29 @@ import matplotlib.pyplot as plt
 import numpy
 
 #cv2.IMREAD_COLOR:彩色   彩色通道：RGB    范围：0～255  
-#cv2.IMREAD_GRAYSCALE:灰度  一个通道  
+#cv2.IMREAD_GRAYSCALE:灰度  一个通道 
+# 
+#读取视频-捕获摄像头
+#cv2.V
 
-img_rgb=cv2.imread('/home/cat/Desktop/opencv/picture/car.jpg',cv2.IMREAD_COLOR)
-#img_rgb=cv2.imread('/home/cat/Desktop/opencv/picture/car.jpg')
-#[[[h,w,c]通道]] BGR格式
+vc = cv2.VideoCapture('/home/cat/Desktop/opencv/picture/1418490767-1-30080.mp4')
+#检查
+if vc.isOpened():
+    open_, frame = vc.read()#open_为判断的bool;frame则为取出的那帧的数据
+else:
+    open_ = False
 
-img_gray=cv2.imread('/home/cat/Desktop/opencv/picture/car.jpg',cv2.IMREAD_GRAYSCALE)
+while open_:
+    ret, frame = vc.read()
+    if frame is None:
+        break
+    if ret == True:
+        gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
+        cv2.imshow('result',gray)
+        if cv2.waitKey(1) & 0xFF == 27:
+            break
+vc.release()
+cv2.destroyAllWindows()
 
-
-#print(img_rgb)
-#print(img_rgb.shape)
-print(img_gray)
-print(img_gray.shape)
-
-def cv_show(name,img):
-    cv2.imshow(name,img)
-    cv2.waitKey(10000)#任意键跳出
-    cv2.destroyAllWindows()#销毁窗口
-
-cv_show("image",img_rgb)
-cv_show("image1",img_gray)
-
-#保存
-cv2.imwrite('/home/cat/Desktop/opencv/picture/mycar.png',img_rgb)
-
-print(type(img_gray))#底层格式
-
-print(img_gray.size)#像素点
-
-print(img_gray.dtype)#数据类型
 
 
