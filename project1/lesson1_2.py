@@ -6,7 +6,7 @@ import numpy
 #cv2.IMREAD_GRAYSCALE:灰度  一个通道 
 # 
 #读取视频-捕获摄像头
-#cv2.V
+#cv2.VideoCapture
 
 vc = cv2.VideoCapture('/home/cat/Desktop/opencv/picture/1418490767-1-30080.mp4')
 #检查
@@ -23,9 +23,11 @@ while open_:
         gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
         cv2.imshow('result',gray)
         if cv2.waitKey(1) & 0xFF == 27:
+#        if cv2.waitKey(1) & 0xFF == ord('q'):#   q键盘       
             break
 vc.release()
 cv2.destroyAllWindows()
+
 
 
 
